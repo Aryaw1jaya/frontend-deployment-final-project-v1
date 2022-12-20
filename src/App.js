@@ -1,21 +1,19 @@
-import './App.css'
-import { Routes, Route, Link } from 'react-router-dom'
-import EditPhoto from './routes/EditPhoto';
-import Home from './routes/Home';
-import Photos from './routes/Photos';
-import AddPhoto from './routes/AddPhoto';
-import NotFound from './routes/NotFound';
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import EditPhoto from "./routes/EditPhoto";
+import Home from "./routes/Home";
+import Photos from "./routes/Photos";
+import AddPhoto from "./routes/AddPhoto";
+import NotFound from "./routes/NotFound";
 
 const App = () => {
   return (
     <>
-      <div className='navbar'>
-        <div className='studentInfo'>
-          {/* TODO: answer here */}
-        </div>
-        <Link to='/'>Home</Link>
-        <Link to='/photos'>My Photos</Link>
-        <Link to='/add'>Add Photo</Link>
+      <div className="navbar">
+        <div className="studentInfo">{/* TODO: answer here */}</div>
+        <Link to="/">Home</Link>
+        <Link to="/photos">My Photos</Link>
+        <Link to="/add">Add Photo</Link>
       </div>
 
       <Routes>
@@ -27,6 +25,11 @@ const App = () => {
         <Route path="/add" element={<AddPhoto />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <div>
+        <h2 className="studentName">Arya Wijaya</h2>
+        <p className="studentId">FE2628549</p>
+      </div>
     </>
   );
 };

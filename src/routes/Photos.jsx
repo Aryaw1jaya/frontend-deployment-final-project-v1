@@ -11,20 +11,44 @@ const Photos = () => {
   const [error, setError] = useState(null);
 
   const deletePhoto = (id) => {
-    // TODO: answer here
+    fetch(`https://gallery-app-server.vercel.app/photos/${id}`, {
+      method: "DELETE",
+    }).then((_) => setPhotos(photos.filter((photo) => photo.id !== id)));
   };
 
   useEffect(() => {
     setLoading(true);
-    // TODO: answer here
-  }, [sort, submited]);
+    if (sort !== "" || search !== "") {
+      fetch(
+        `https://gallery-app-server.vercel.app/photos?_sort=id&_order=${sort}&q=${search}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPhotos(data);
+          setLoading(false);
+        });
+    } else {
+      fetch("https://gallery-app-server.vercel.app/photos");
+    }
+  }, [search, sort, submited]);
 
   useEffect(() => {
     setLoading(true);
-    // TODO: answer here
+    fetch("https://gallery-app-server.vercel.app/photos")
+      .then((response) => response.json())
+      .then((data) => {
+        setPhotos(data);
+        setLoading(false);
+      })
+      .catch((error) => setError(error));
   }, []);
 
-  if (error) return <h1 style={{ width: "100%", textAlign: "center", marginTop: "20px" }} >Error!</h1>;
+  if (error)
+    return (
+      <h1 style={{ width: "100%", textAlign: "center", marginTop: "20px" }}>
+        Error!
+      </h1>
+    );
 
   return (
     <>

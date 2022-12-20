@@ -12,12 +12,32 @@ const EditPhoto = () => {
 
   const editPhoto = (e) => {
     e.preventDefault();
-    // TODO: answer here
+    fetch(`https://gallery-app-server.vercel.app/photos/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        imageUrl: imageUrl,
+        captions: captions,
+        updatedAt: "2022-11-28T04:31:16.956Z",
+      }),
+    })
+      .then((response) => {
+        response.json();
+        navigate("/photos");
+      })
+      .catch(error, setError(error));
   };
 
   useEffect(() => {
     setLoading(true);
-    // TODO: answer here
+    fetch(`https://gallery-app-server.vercel.app/photos/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setImageUrl(data.imageUrl);
+        setCaptions(data.captions);
+        setLoading(false);
+        console.log(data);
+      });
   }, [id]);
 
   if (error) return <div>Error!</div>;
@@ -50,7 +70,12 @@ const EditPhoto = () => {
                 onChange={(e) => setCaptions(e.target.value)}
               />
             </label>
-            <input className="submit-btn" type="submit" value="Submit" data-testid="submit" />
+            <input
+              className="submit-btn"
+              type="submit"
+              value="Submit"
+              data-testid="submit"
+            />
           </form>
         </div>
       )}
