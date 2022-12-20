@@ -26,7 +26,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      <div>
+      <div className="footer">
         <h2 className="studentName">Arya Wijaya</h2>
         <p className="studentId">FE2628549</p>
       </div>
